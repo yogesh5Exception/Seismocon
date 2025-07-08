@@ -8,20 +8,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import com.fiveexceptions.seismocon.core.commonComposables.AppIconImage
 import com.fiveexceptions.seismocon.ui.DarkBlue
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
 import seismocon.composeapp.generated.resources.Res
-import seismocon.composeapp.generated.resources.img_bottom
-import seismocon.composeapp.generated.resources.img_bottom_fade
 import seismocon.composeapp.generated.resources.img_main_bg
-import seismocon.composeapp.generated.resources.img_seismocon
 
 @Composable
 @Preview
@@ -30,15 +27,13 @@ fun App() {
         Box(modifier = Modifier.fillMaxSize().background(color = DarkBlue)) {
             Image(
                 painter = painterResource(Res.drawable.img_main_bg),
-                contentDescription = "img_bottom",
+                contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
 
-            Image(
-                painter = painterResource(Res.drawable.img_seismocon),
-                contentDescription = "seismocon",
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 36.dp).heightIn(130.dp)
+            AppIconImage(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 36.dp).heightIn(120.dp)
                     .align(Alignment.Center),
             )
         }
