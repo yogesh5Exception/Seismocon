@@ -39,12 +39,14 @@ import seismocon.composeapp.generated.resources.img_auth_bg
 
 @Composable
 @Preview
-fun LoginScreen() {
-
+fun LoginScreen(
+    signInClick : () -> Unit = {},
+    guestClick : () -> Unit = {},
+    forgotPasswordClick : () -> Unit = {}
+) {
     var userName by rememberSaveable {
         mutableStateOf("")
     }
-
     var password by rememberSaveable {
         mutableStateOf("")
     }
@@ -99,18 +101,18 @@ fun LoginScreen() {
 
                     CommonButton(
                         text = "Sign in",
-                        onClick = { },
+                        onClick = { signInClick() },
                         modifier = Modifier.padding(top = 36.dp)
                     )
 
                     CommonButton(
                         text = "Guest",
-                        onClick = { },
+                        onClick = { guestClick() },
                         modifier = Modifier.padding(top = 20.dp)
                     )
 
                     TextButton(
-                        onClick = { },
+                        onClick = { forgotPasswordClick() },
                         modifier = Modifier.padding(top = 16.dp)
                     ) {
                         Text(
@@ -122,8 +124,6 @@ fun LoginScreen() {
                     }
                 }
             }
-
-
         }
     }
 }
