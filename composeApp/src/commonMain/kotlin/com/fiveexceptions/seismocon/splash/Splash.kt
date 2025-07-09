@@ -56,7 +56,9 @@ fun App(onNavHostReady: suspend (NavController) -> Unit = {}) {
         }
         composable("splash") {
             Splash {
-                navController.navigate("Login")
+                navController.navigate("Login"){
+                    navController.popBackStack()
+                }
             }
         }
     }
