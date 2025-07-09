@@ -23,7 +23,6 @@ import com.fiveexceptions.seismocon.auth.LoginScreen
 import com.fiveexceptions.seismocon.core.commonComposables.AppIconImage
 import com.fiveexceptions.seismocon.dashboard.home.HomeScreen
 import com.fiveexceptions.seismocon.ui.DarkBlue
-import kotlinx.coroutines.Delay
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -56,7 +55,7 @@ fun App(onNavHostReady: suspend (NavController) -> Unit = {}) {
         }
         composable("splash") {
             Splash {
-                navController.navigate("Login"){
+                navController.navigate("Login") {
                     navController.popBackStack()
                 }
             }
@@ -68,7 +67,7 @@ fun App(onNavHostReady: suspend (NavController) -> Unit = {}) {
 }
 
 @Composable
-fun Splash(callHome : () -> Unit){
+fun Splash(callHome: () -> Unit) {
     MaterialTheme {
         Box(modifier = Modifier.fillMaxSize().background(color = DarkBlue)) {
             Image(
@@ -84,7 +83,7 @@ fun Splash(callHome : () -> Unit){
             )
         }
     }
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         delay(500)
         callHome()
     }

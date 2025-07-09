@@ -5,15 +5,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,8 +24,11 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.fiveexceptions.seismocon.core.commonComposables.AppIconImage
 import com.fiveexceptions.seismocon.core.commonComposables.LabelText
@@ -32,9 +37,16 @@ import com.fiveexceptions.seismocon.ui.DarkBlue
 import com.fiveexceptions.seismocon.ui.GradientDarkBlue
 import com.fiveexceptions.seismocon.ui.GradientLightBlue
 import com.fiveexceptions.seismocon.ui.Gray
+import com.fiveexceptions.seismocon.ui.Green
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import seismocon.composeapp.generated.resources.Res
+import seismocon.composeapp.generated.resources.img_earthquakes_now
+import seismocon.composeapp.generated.resources.img_my_object
+import seismocon.composeapp.generated.resources.img_my_seismocon
+import seismocon.composeapp.generated.resources.img_science
+import seismocon.composeapp.generated.resources.img_technology
+import seismocon.composeapp.generated.resources.inter_regular
 import seismocon.composeapp.generated.resources.inter_semibold
 import kotlin.math.PI
 import kotlin.math.pow
@@ -51,76 +63,123 @@ fun HomeScreen() {
                     .gradientBackground(listOf(GradientDarkBlue, GradientLightBlue), angle = -56f)
             )
 
-            Scaffold(containerColor = Color.Transparent) { paddingValues ->
-                Column(
-                    modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-                        .padding(paddingValues),
-                    horizontalAlignment = Alignment.CenterHorizontally
+            Column(
+                modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+                    .padding(top = 26.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                AppIconImage(
+                    modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
+                        .padding(horizontal = 40.dp).heightIn(90.dp)
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(top = 40.dp)
+                        .padding(horizontal = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    AppIconImage(
-                        modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
-                            .padding(horizontal = 40.dp).heightIn(90.dp)
+                    LabelText(
+                        text = "Home",
+                        modifier = Modifier,
+                        textStyle = MaterialTheme.typography.titleMedium
                     )
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(top = 40.dp)
-                            .padding(horizontal = 20.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        LabelText(
-                            text = "Home",
-                            modifier = Modifier,
-                            textStyle = MaterialTheme.typography.titleMedium
-                        )
-
-                        Text(
-                            "Hello John",
-                            fontFamily = FontFamily(Font(Res.font.inter_semibold)),
-                            style = MaterialTheme.typography.titleSmall,
-                            color = Color.White,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.background(
-                                color = Gray,
-                                shape = RoundedCornerShape(16.dp)
-                            ).padding(horizontal = 23.dp).padding(vertical = 4.dp)
-                        )
-                    }
-
-                    HomeCard(
-                        title = "Messages", titleColor = Color.Black, content = {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.Start
-                            ) {
-                                Text(
-                                    "No alerts reported",
-                                    color = Color.Black,
-                                    style = MaterialTheme.typography.titleSmall
-                                )
-                            }
-                        },
-                        modifier = Modifier.padding(top = 20.dp).fillMaxWidth()
-                            .padding(horizontal = 20.dp)
-                    )
-
-                    HomeCard(
-                        title = "My Object", titleColor = Color.White, content = {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.Start
-                            ) {
-                                Text(
-                                    "No alerts reported",
-                                    color = Color.Black,
-                                    style = MaterialTheme.typography.titleSmall
-                                )
-                            }
-                        },
-                        modifier = Modifier.padding(top = 20.dp).fillMaxWidth()
-                            .padding(horizontal = 20.dp)
+                    Text(
+                        "Hello John",
+                        fontFamily = FontFamily(Font(Res.font.inter_semibold)),
+                        style = MaterialTheme.typography.titleSmall,
+                        color = Color.White,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.background(
+                            color = Gray, shape = RoundedCornerShape(16.dp)
+                        ).padding(horizontal = 23.dp).padding(vertical = 4.dp)
                     )
                 }
+
+                HomeCard(
+                    title = "Messages", titleColor = Color.Black,
+                    content = {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Start
+                        ) {
+                            Text(
+                                "No alerts reported",
+                                color = Color.Black,
+                                fontFamily = FontFamily(Font(Res.font.inter_regular)),
+                                style = MaterialTheme.typography.titleSmall
+                            )
+                        }
+                    },
+                    modifier = Modifier.padding(top = 20.dp).fillMaxWidth()
+                        .padding(horizontal = 20.dp),
+                )
+
+                HomeCard(
+                    title = "My Object",
+                    titleColor = Color.White,
+                    bgImage = Res.drawable.img_my_object,
+                    modifier = Modifier.padding(top = 20.dp).fillMaxWidth()
+                        .padding(horizontal = 20.dp)
+                )
+
+                HomeCard(
+                    title = "My Seismocon",
+                    titleColor = Color.Black,
+                    bgImage = Res.drawable.img_my_seismocon,
+                    modifier = Modifier.padding(top = 20.dp).fillMaxWidth()
+                        .padding(horizontal = 20.dp),
+                    content = {
+                        Column {
+                            Spacer(modifier = Modifier.height(32.dp))
+
+                            Text(
+                                buildAnnotatedString {
+                                    withStyle(style = SpanStyle(color = Color.Black)) {
+                                        append("Motor Unit ")
+                                    }
+                                    withStyle(style = SpanStyle(color = Green)) {
+                                        append("On")
+                                    }
+                                },
+                                fontFamily = FontFamily(Font(Res.font.inter_regular)),
+                                style = MaterialTheme.typography.titleSmall,
+                            )
+                        }
+                    })
+
+
+                Row(modifier = Modifier.fillMaxWidth().padding(top = 20.dp)) {
+
+                    HomeCard(
+                        title = "Technology",
+                        titleColor = Color.White,
+                        bgImage = Res.drawable.img_technology,
+                        modifier = Modifier.fillMaxWidth()
+                            .padding(start = 20.dp).weight(1f)
+                    )
+
+                    Spacer(modifier = Modifier.width(10.dp))
+
+                    HomeCard(
+                        title = "Earthquakes Now",
+                        titleColor = Color.White,
+                        bgImage = Res.drawable.img_earthquakes_now,
+                        modifier = Modifier.fillMaxWidth()
+                            .padding(end = 20.dp).weight(1f)
+                    )
+                }
+
+                HomeCard(
+                    title = "Science",
+                    titleColor = Color.White,
+                    bgImage = Res.drawable.img_science,
+                    modifier = Modifier.padding(top = 20.dp).fillMaxWidth()
+                        .padding(horizontal = 20.dp)
+                )
+
+                Spacer(Modifier.height(50.dp))
             }
         }
     }
@@ -154,8 +213,6 @@ private fun Modifier.gradientBackground(colors: List<Color>, angle: Float) = thi
                 colors = colors,
                 start = Offset(size.width, size.height) - exactOffset,
                 end = exactOffset
-            ),
-            size = size
+            ), size = size
         )
-    }
-)
+    })

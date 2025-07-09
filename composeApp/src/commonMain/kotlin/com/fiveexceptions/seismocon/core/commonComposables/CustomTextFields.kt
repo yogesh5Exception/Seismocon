@@ -50,7 +50,12 @@ fun TextFieldWithLeadingIcon(
                     painter = leadingIcon,
                     contentDescription = null,
                     tint = Color.White,
-                    modifier = Modifier.padding(start = 8.dp, end = 10.dp)
+                    modifier = Modifier.padding(
+                        start = 8.dp,
+                        end = 10.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
+                    )
                         .background(color = White30Per, shape = RoundedCornerShape(2.dp))
                         .padding(iconBgPadding)
                 )
