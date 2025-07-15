@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.0"
 }
 
 kotlin {
@@ -44,6 +45,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation("org.jetbrains.androidx.navigation:navigation-compose:2.9.0-beta03")
             implementation("com.patrykandpatrick.vico:multiplatform-m3:2.1.3")
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.0")
 
             // rejected because have dot in chart
 //            implementation("io.github.thechance101:chart:1.1.0")

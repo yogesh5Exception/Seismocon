@@ -2,6 +2,7 @@ package com.fiveexceptions.seismocon.dashboard.home.commonComposables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.fiveexceptions.seismocon.ui.LightGray
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -29,9 +31,16 @@ fun HomeCard(
     titleColor: Color,
     content: (@Composable () -> Unit)? = null,
     modifier: Modifier = Modifier,
-    bgImage: DrawableResource? = null
+    bgImage: DrawableResource? = null,
+    onClick: () -> Unit = {},
+    navController: NavController
 ) {
-    Box(modifier = modifier.background(color = LightGray, shape = RoundedCornerShape(12.dp))) {
+    Box(
+        modifier = modifier.background(color = LightGray, shape = RoundedCornerShape(12.dp))
+            .clickable(onClick = {
+                onClick.invoke()
+            })
+    ) {
         bgImage?.let {
             Image(
                 painterResource(it),

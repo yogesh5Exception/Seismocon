@@ -1,13 +1,11 @@
-package com.fiveexceptions.seismocon.dashboard.home.allSensorsNow
+package com.fiveexceptions.seismocon.dashboard.notification
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -32,21 +30,69 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import seismocon.composeapp.generated.resources.Res
 import seismocon.composeapp.generated.resources.ic_back_white_color
 
-@Preview
 @Composable
-fun AllSensorsNow() {
+@Preview
+fun NotificationScreen() {
+
+    val items: List<NotificationData> = listOf(
+        NotificationData(
+            "08-06-2024",
+            "We have an update 08-12-2024. The system will be down for 2 hours etc."
+        ),
+        NotificationData(
+            "09-06-2024",
+            "M.4 earthquake happened in xxxxx at 4.55 am. This is 125 miles from your home."
+        ),
+        NotificationData(
+            "10-06-2024",
+            "We have an update 08-12-2024. The system will be down for 2 hours etc."
+        ),
+        NotificationData(
+            "11-06-2024",
+            "M.4 earthquake happened in xxxxx at 4.55 am. This is 125 miles from your home."
+        ),
+        NotificationData(
+            "12-06-2024",
+            "We have an update 08-12-2024. The system will be down for 2 hours etc."
+        ),
+        NotificationData(
+            "13-06-2024",
+            "M.4 earthquake happened in xxxxx at 4.55 am. This is 125 miles from your home."
+        ), NotificationData(
+            "14-06-2024",
+            "We have an update 08-12-2024. The system will be down for 2 hours etc."
+        ),
+        NotificationData(
+            "15-06-2024",
+            "M.4 earthquake happened in xxxxx at 4.55 am. This is 125 miles from your home."
+        ),
+        NotificationData(
+            "16-06-2024",
+            "We have an update 08-12-2024. The system will be down for 2 hours etc."
+        ),
+        NotificationData(
+            "17-06-2024",
+            "M.4 earthquake happened in xxxxx at 4.55 am. This is 125 miles from your home."
+        ),
+        NotificationData(
+            "18-06-2024",
+            "We have an update 08-12-2024. The system will be down for 2 hours etc."
+        ),
+        NotificationData(
+            "19-06-2024",
+            "M.4 earthquake happened in xxxxx at 4.55 am. This is 125 miles from your home."
+        )
+    )
+
     MaterialTheme {
         Box(
             modifier = Modifier.fillMaxSize()
                 .gradientBackground(listOf(GradientDarkBlue, GradientLightBlue), angle = -56f)
         ) {
-            Box(
-                modifier = Modifier.fillMaxSize()
-            )
 
             Column(
-                modifier = Modifier.fillMaxSize()
-                    .padding(top = 26.dp), horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.fillMaxSize().padding(top = 26.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 AppIconImage(
                     modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
@@ -54,11 +100,10 @@ fun AllSensorsNow() {
                 )
 
                 Box(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp)
-                        .padding(top = 20.dp)
+                    modifier = Modifier.fillMaxWidth().padding(top = 20.dp).padding(horizontal = 20.dp)
                 ) {
                     LabelText(
-                        text = "All Sensors Now",
+                        text = "Notification",
                         modifier = Modifier.fillMaxWidth(),
                         textStyle = MaterialTheme.typography.titleMedium
                     )
@@ -77,19 +122,16 @@ fun AllSensorsNow() {
                     }
                 }
 
-                val listOfItems = listOf("LiDAR", "Gyro", "Acoustic", "PIR")
-
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp),
-                    contentPadding = PaddingValues(vertical = 30.dp)
+                    contentPadding = PaddingValues(vertical = 20.dp),
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    items(listOfItems) {
-                        SensorItem(modifier = Modifier.fillMaxWidth(), itemName = it)
-                        Spacer(modifier = Modifier.height(20.dp))
+                    items(items) { item ->
+                        NotificationItem(item)
                     }
                 }
-
             }
         }
     }
 }
+

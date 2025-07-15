@@ -6,8 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.fiveexceptions.seismocon.dashboard.home.allSensorsNow.AllSensorsNow
-import com.fiveexceptions.seismocon.splash.App
+import com.fiveexceptions.seismocon.dashboard.notification.NotificationScreen
+import com.fiveexceptions.seismocon.navigation.App
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,11 +16,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-//            App()
+            App()
 //            LoginScreen()
 //            ForgotPasswordScreen()
 //            HomeScreen()
-            AllSensorsNow()
+//            AllSensorsNow()
+//            MyObjectScreen()
+//            MyObjectDetailsScreen()
+//            MyObjectReportsAndNotificationScreen()
+//            MyObjectMySeismoconScreen()
+//            MyObjectInviteAFriendScreen()
+//            NotificationScreen()
         }
     }
 }

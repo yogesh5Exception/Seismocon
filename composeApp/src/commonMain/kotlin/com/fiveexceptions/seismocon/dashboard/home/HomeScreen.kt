@@ -30,16 +30,21 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.fiveexceptions.seismocon.core.commonComposables.AppIconImage
 import com.fiveexceptions.seismocon.core.commonComposables.LabelText
 import com.fiveexceptions.seismocon.dashboard.home.commonComposables.HomeCard
+import com.fiveexceptions.seismocon.navigation.EarthquakesNowScreen
+import com.fiveexceptions.seismocon.navigation.MyObjectScreen
+import com.fiveexceptions.seismocon.navigation.MySeismoconScreen
+import com.fiveexceptions.seismocon.navigation.ScienceScreen
+import com.fiveexceptions.seismocon.navigation.TechnologyScreen
 import com.fiveexceptions.seismocon.ui.DarkBlue
 import com.fiveexceptions.seismocon.ui.GradientDarkBlue
 import com.fiveexceptions.seismocon.ui.GradientLightBlue
 import com.fiveexceptions.seismocon.ui.Gray
 import com.fiveexceptions.seismocon.ui.Green
 import org.jetbrains.compose.resources.Font
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import seismocon.composeapp.generated.resources.Res
 import seismocon.composeapp.generated.resources.img_earthquakes_now
 import seismocon.composeapp.generated.resources.img_my_object
@@ -53,8 +58,7 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 @Composable
-@Preview
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
 
     MaterialTheme {
         Box(modifier = Modifier.fillMaxSize().background(color = DarkBlue)) {
@@ -113,7 +117,7 @@ fun HomeScreen() {
                         }
                     },
                     modifier = Modifier.padding(top = 20.dp).fillMaxWidth()
-                        .padding(horizontal = 20.dp),
+                        .padding(horizontal = 20.dp), navController = navController
                 )
 
                 HomeCard(
@@ -121,7 +125,9 @@ fun HomeScreen() {
                     titleColor = Color.White,
                     bgImage = Res.drawable.img_my_object,
                     modifier = Modifier.padding(top = 20.dp).fillMaxWidth()
-                        .padding(horizontal = 20.dp)
+                        .padding(horizontal = 20.dp),
+                    onClick = { navController.navigate(MyObjectScreen) },
+                    navController = navController
                 )
 
                 HomeCard(
@@ -147,7 +153,10 @@ fun HomeScreen() {
                                 style = MaterialTheme.typography.titleSmall,
                             )
                         }
-                    })
+                    }, onClick = {
+                        navController.navigate(MySeismoconScreen)
+                    }, navController = navController
+                )
 
 
                 Row(modifier = Modifier.fillMaxWidth().padding(top = 20.dp)) {
@@ -157,7 +166,10 @@ fun HomeScreen() {
                         titleColor = Color.White,
                         bgImage = Res.drawable.img_technology,
                         modifier = Modifier.fillMaxWidth()
-                            .padding(start = 20.dp).weight(1f)
+                            .padding(start = 20.dp).weight(1f),
+                        onClick = {
+                            navController.navigate(TechnologyScreen)
+                        }, navController = navController
                     )
 
                     Spacer(modifier = Modifier.width(10.dp))
@@ -167,7 +179,10 @@ fun HomeScreen() {
                         titleColor = Color.White,
                         bgImage = Res.drawable.img_earthquakes_now,
                         modifier = Modifier.fillMaxWidth()
-                            .padding(end = 20.dp).weight(1f)
+                            .padding(end = 20.dp).weight(1f),
+                        onClick = {
+                            navController.navigate(EarthquakesNowScreen)
+                        }, navController = navController
                     )
                 }
 
@@ -176,7 +191,9 @@ fun HomeScreen() {
                     titleColor = Color.White,
                     bgImage = Res.drawable.img_science,
                     modifier = Modifier.padding(top = 20.dp).fillMaxWidth()
-                        .padding(horizontal = 20.dp)
+                        .padding(horizontal = 20.dp), onClick = {
+                        navController.navigate(ScienceScreen)
+                    }, navController = navController
                 )
 
                 Spacer(Modifier.height(50.dp))
@@ -185,7 +202,7 @@ fun HomeScreen() {
     }
 }
 
-private fun Modifier.gradientBackground(colors: List<Color>, angle: Float) = this.then(
+fun Modifier.gradientBackground(colors: List<Color>, angle: Float) = this.then(
     Modifier.drawBehind {
 
         // Setting the angle in radians

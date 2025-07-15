@@ -1,6 +1,7 @@
-package com.fiveexceptions.seismocon.dashboard.home.allSensorsNow
+package com.fiveexceptions.seismocon.dashboard.home.myObject
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,9 +22,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.fiveexceptions.seismocon.core.commonComposables.AppIconImage
 import com.fiveexceptions.seismocon.core.commonComposables.LabelText
 import com.fiveexceptions.seismocon.dashboard.home.gradientBackground
+import com.fiveexceptions.seismocon.dashboard.home.myObject.data.MyObjectData
+import com.fiveexceptions.seismocon.navigation.MyObjectDetailsScreen
+import com.fiveexceptions.seismocon.navigation.MyObjectInviteAFriendScreen
+import com.fiveexceptions.seismocon.navigation.MyObjectReportsAndNotificationScreen
+import com.fiveexceptions.seismocon.navigation.MySeismoconScreen
 import com.fiveexceptions.seismocon.ui.GradientDarkBlue
 import com.fiveexceptions.seismocon.ui.GradientLightBlue
 import com.fiveexceptions.seismocon.ui.Gray
@@ -32,21 +39,18 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import seismocon.composeapp.generated.resources.Res
 import seismocon.composeapp.generated.resources.ic_back_white_color
 
-@Preview
 @Composable
-fun AllSensorsNow() {
+@Preview
+fun MyObjectScreen(navController: NavController) {
     MaterialTheme {
         Box(
             modifier = Modifier.fillMaxSize()
                 .gradientBackground(listOf(GradientDarkBlue, GradientLightBlue), angle = -56f)
         ) {
-            Box(
-                modifier = Modifier.fillMaxSize()
-            )
 
             Column(
-                modifier = Modifier.fillMaxSize()
-                    .padding(top = 26.dp), horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.fillMaxSize().padding(top = 26.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 AppIconImage(
                     modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
@@ -58,7 +62,7 @@ fun AllSensorsNow() {
                         .padding(top = 20.dp)
                 ) {
                     LabelText(
-                        text = "All Sensors Now",
+                        text = "My Objects",
                         modifier = Modifier.fillMaxWidth(),
                         textStyle = MaterialTheme.typography.titleMedium
                     )
@@ -66,7 +70,7 @@ fun AllSensorsNow() {
                     Box(
                         modifier = Modifier.size(28.dp).border(
                             width = 1.dp, color = Gray, shape = RoundedCornerShape(8.dp)
-                        ).padding(6.dp)
+                        ).padding(6.dp).clickable(onClick = { navController.popBackStack() })
                     ) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_back_white_color),
@@ -77,18 +81,49 @@ fun AllSensorsNow() {
                     }
                 }
 
-                val listOfItems = listOf("LiDAR", "Gyro", "Acoustic", "PIR")
+                val listOfItems = listOf(
+                    MyObjectData(
+                        propertyName = "Property 1",
+                        propertyAddress = "vijay nagar near krishna doodh dairy",
+                        id = 1
+                    ), MyObjectData(
+                        propertyName = "Property 2",
+                        propertyAddress = "Radisson chauraha near malviya petrol pump",
+                        id = 2
+                    ), MyObjectData(
+                        propertyName = "Property 3",
+                        propertyAddress = "vijay nagar near krishna doodh dairy",
+                        id = 3
+                    ), MyObjectData(
+                        propertyName = "Property 4",
+                        propertyAddress = "Radisson chauraha near malviya petrol pump",
+                        id = 4
+                    )
+                )
 
                 LazyColumn(
                     modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp),
                     contentPadding = PaddingValues(vertical = 30.dp)
                 ) {
                     items(listOfItems) {
-                        SensorItem(modifier = Modifier.fillMaxWidth(), itemName = it)
+                        MyObjectItem(
+                            modifier = Modifier.fillMaxWidth(),
+                            item = it,
+                            onDetailsClick = {
+                                navController.navigate(MyObjectDetailsScreen)
+                            },
+                            onInviteClick = {
+                                navController.navigate(MyObjectInviteAFriendScreen)
+                            },
+                            onReportsClick = {
+                                navController.navigate(MyObjectReportsAndNotificationScreen)
+                            },
+                            onMySeismoconClick = {
+                                navController.navigate(MySeismoconScreen)
+                            })
                         Spacer(modifier = Modifier.height(20.dp))
                     }
                 }
-
             }
         }
     }
