@@ -58,7 +58,7 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, modifier: Modifier = Modifier) {
 
     MaterialTheme {
         Box(modifier = Modifier.fillMaxSize().background(color = DarkBlue)) {
@@ -68,12 +68,12 @@ fun HomeScreen(navController: NavController) {
             )
 
             Column(
-                modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+                modifier = modifier.verticalScroll(rememberScrollState())
                     .padding(top = 26.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 AppIconImage(
-                    modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
+                    modifier = Modifier.fillMaxWidth()
                         .padding(horizontal = 40.dp).heightIn(90.dp)
                 )
 

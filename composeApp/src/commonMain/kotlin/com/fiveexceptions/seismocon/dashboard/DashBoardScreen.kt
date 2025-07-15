@@ -1,5 +1,6 @@
 package com.fiveexceptions.seismocon.dashboard
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -27,8 +28,7 @@ import seismocon.composeapp.generated.resources.ic_notification
 import seismocon.composeapp.generated.resources.ic_profile
 
 data class BottomNavigationItem(
-    val unselectedIcon: DrawableResource,
-    val selectedIcon: DrawableResource,
+    val icon: DrawableResource,
     val label: String
 )
 
@@ -40,50 +40,46 @@ fun DashboardScreen(navController: NavController) {
     }
     val items = listOf(
         BottomNavigationItem(
-            unselectedIcon = Res.drawable.ic_home,
-            selectedIcon = Res.drawable.ic_home,
+            icon = Res.drawable.ic_home,
             label = "Home"
         ),
         BottomNavigationItem(
-            unselectedIcon = Res.drawable.ic_notification,
-            selectedIcon = Res.drawable.ic_notification,
+            icon = Res.drawable.ic_notification,
             label = "Notifications"
         ),
         BottomNavigationItem(
-            unselectedIcon = Res.drawable.ic_profile,
-            selectedIcon = Res.drawable.ic_profile,
+            icon = Res.drawable.ic_profile,
             label = "Profile"
         ),
         BottomNavigationItem(
-            unselectedIcon = Res.drawable.ic_menu,
-            selectedIcon = Res.drawable.ic_menu,
+            icon = Res.drawable.ic_menu,
             label = "Menu"
         )
     )
     MaterialTheme {
         Scaffold(bottomBar = {
-            NavigationBar() {
+            NavigationBar {
                 items.forEachIndexed { index, item ->
                     NavigationBarItem(
                         selected = index == selectedItemIndex,
                         onClick = {
-                            selectedItemIndex = index
-
-                            if (selectedItemIndex == 0) {
-
-                            } else if (selectedItemIndex == 1) {
-                                navController.navigate(NotificationScreen)
-                            } else if (selectedItemIndex == 2) {
-
-                            } else {
-
+                            when (item.label) {
+                                "Home" -> selectedItemIndex = index
+                                "Notifications" -> navController.navigate(NotificationScreen)
                             }
-
                         },
                         icon = {
+                            val icon = when (item.label) {
+                                "Home" -> Res.drawable.ic_home
+                                "Notifications" -> Res.drawable.ic_notification
+                                "Profile" -> Res.drawable.ic_profile
+                                "Menu" -> Res.drawable.ic_menu
+                                else -> Res.drawable.ic_home
+                            }
                             Icon(
-                                painterResource(item.selectedIcon),
-                                contentDescription = item.label, modifier = Modifier.size(20.dp)
+                                painterResource(icon),
+                                contentDescription = item.label,
+                                modifier = Modifier.size(28.dp)
                             )
                         }, label = {
                             Text(text = item.label)
@@ -91,9 +87,13 @@ fun DashboardScreen(navController: NavController) {
                     )
                 }
             }
-        }) {
-
-            HomeScreen(navController = navController)
+        }) { paddingValues ->
+            when (selectedItemIndex) {
+                0 -> HomeScreen(
+                    modifier = Modifier.padding(paddingValues),
+                    navController = navController
+                )
+            }
         }
     }
 }
