@@ -1,6 +1,7 @@
 package com.fiveexceptions.seismocon.dashboard.notification
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.fiveexceptions.seismocon.core.commonComposables.AppIconImage
 import com.fiveexceptions.seismocon.core.commonComposables.LabelText
 import com.fiveexceptions.seismocon.dashboard.home.gradientBackground
@@ -32,7 +34,7 @@ import seismocon.composeapp.generated.resources.ic_back_white_color
 
 @Composable
 @Preview
-fun NotificationScreen() {
+fun NotificationScreen(navController: NavController) {
 
     val items: List<NotificationData> = listOf(
         NotificationData(
@@ -100,7 +102,8 @@ fun NotificationScreen() {
                 )
 
                 Box(
-                    modifier = Modifier.fillMaxWidth().padding(top = 20.dp).padding(horizontal = 20.dp)
+                    modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
+                        .padding(horizontal = 20.dp)
                 ) {
                     LabelText(
                         text = "Notification",
@@ -111,7 +114,7 @@ fun NotificationScreen() {
                     Box(
                         modifier = Modifier.size(28.dp).border(
                             width = 1.dp, color = Gray, shape = RoundedCornerShape(8.dp)
-                        ).padding(6.dp)
+                        ).padding(6.dp).clickable(onClick = { navController.popBackStack() })
                     ) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_back_white_color),

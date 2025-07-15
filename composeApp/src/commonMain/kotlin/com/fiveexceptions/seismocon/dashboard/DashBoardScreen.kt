@@ -81,8 +81,6 @@ fun DashboardScreen(navController: NavController) {
                                 contentDescription = item.label,
                                 modifier = Modifier.size(28.dp)
                             )
-                        }, label = {
-                            Text(text = item.label)
                         }, alwaysShowLabel = false
                     )
                 }

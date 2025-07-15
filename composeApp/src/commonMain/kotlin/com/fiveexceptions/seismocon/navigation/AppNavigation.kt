@@ -98,7 +98,7 @@ fun App(onNavHostReady: suspend (NavController) -> Unit = {}) {
         }
 
         composable<NotificationScreen> {
-            NotificationScreen()
+            NotificationScreen(navController)
         }
 
     }
