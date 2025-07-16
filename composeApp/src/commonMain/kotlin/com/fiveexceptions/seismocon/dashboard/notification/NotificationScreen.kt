@@ -120,12 +120,14 @@ fun NotificationScreen(navController: NavController) {
                         modifier = Modifier.size(28.dp).border(
                             width = 1.dp, color = Gray, shape = RoundedCornerShape(8.dp)
                         ).padding(6.dp).clickable(
-                            enabled = !isNavigating, onClick = {
+                            enabled = !isNavigating,
+                            onClick = {
                                 if (!isNavigating) {
                                     isNavigating = true
                                     navController.popBackStack()
                                 }
-                            }).align(Alignment.CenterStart)
+                            })
+                            .align(Alignment.CenterStart)
                     ) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_back_white_color),
