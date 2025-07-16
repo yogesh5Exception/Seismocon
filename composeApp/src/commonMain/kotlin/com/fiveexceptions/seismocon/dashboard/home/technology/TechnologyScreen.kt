@@ -60,14 +60,14 @@ fun TechnologyScreen(navController: NavController) {
                 ) {
                     LabelText(
                         text = "The Technology",
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().align(Alignment.Center),
                         textStyle = MaterialTheme.typography.titleMedium
                     )
 
                     Box(
                         modifier = Modifier.size(28.dp).border(
                             width = 1.dp, color = Gray, shape = RoundedCornerShape(8.dp)
-                        ).padding(6.dp).clickable(onClick = { navController.popBackStack() })
+                        ).padding(6.dp).clickable(onClick = { navController.popBackStack() }).align(Alignment.CenterStart)
                     ) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_back_white_color),

@@ -16,6 +16,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,6 +39,7 @@ import seismocon.composeapp.generated.resources.ic_back_white_color
 @Composable
 @Preview
 fun NotificationScreen(navController: NavController) {
+    var isNavigating by remember { mutableStateOf(false) }
 
     val items: List<NotificationData> = listOf(
         NotificationData(
@@ -107,14 +112,20 @@ fun NotificationScreen(navController: NavController) {
                 ) {
                     LabelText(
                         text = "Notification",
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().align(Alignment.Center),
                         textStyle = MaterialTheme.typography.titleMedium
                     )
 
                     Box(
                         modifier = Modifier.size(28.dp).border(
                             width = 1.dp, color = Gray, shape = RoundedCornerShape(8.dp)
-                        ).padding(6.dp).clickable(onClick = { navController.popBackStack() })
+                        ).padding(6.dp).clickable(
+                            enabled = !isNavigating, onClick = {
+                                if (!isNavigating) {
+                                    isNavigating = true
+                                    navController.popBackStack()
+                                }
+                            }).align(Alignment.CenterStart)
                     ) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_back_white_color),
@@ -137,4 +148,3 @@ fun NotificationScreen(navController: NavController) {
         }
     }
 }
-

@@ -16,9 +16,13 @@ import com.fiveexceptions.seismocon.dashboard.home.myObject.myObjectDetails.MyOb
 import com.fiveexceptions.seismocon.dashboard.home.myObject.myObjectInviteAFriend.MyObjectInviteAFriendScreen
 import com.fiveexceptions.seismocon.dashboard.home.myObject.myObjectReportsAndNotification.MyObjectReportsAndNotificationScreen
 import com.fiveexceptions.seismocon.dashboard.home.mySeismocon.MySeismoconScreen
-
 import com.fiveexceptions.seismocon.dashboard.home.science.ScienceScreen
 import com.fiveexceptions.seismocon.dashboard.home.technology.TechnologyScreen
+import com.fiveexceptions.seismocon.dashboard.menu.MenuScreen
+import com.fiveexceptions.seismocon.dashboard.myAccount.MyAccountScreen
+import com.fiveexceptions.seismocon.dashboard.myAccount.friendsAndFamily.FriendsAndFamilyScreen
+import com.fiveexceptions.seismocon.dashboard.myAccount.securityAndLegal.LegalScreen
+import com.fiveexceptions.seismocon.dashboard.myAccount.securityAndLegal.SecurityScreen
 import com.fiveexceptions.seismocon.dashboard.notification.NotificationScreen
 import com.fiveexceptions.seismocon.splash.SplashScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -101,6 +105,25 @@ fun App(onNavHostReady: suspend (NavController) -> Unit = {}) {
             NotificationScreen(navController)
         }
 
+        composable<MyAccountScreen> {
+            MyAccountScreen(navController)
+        }
+
+        composable<MenuScreen> {
+            MenuScreen(navController)
+        }
+
+        composable<FriendsAndFamilyScreen> {
+            FriendsAndFamilyScreen(navController)
+        }
+
+        composable<SecurityScreen> {
+            SecurityScreen(navController)
+        }
+
+        composable<LegalScreen> {
+            LegalScreen(navController)
+        }
     }
 
     LaunchedEffect(navController) {

@@ -43,3 +43,18 @@ object NotificationScreen
 
 @Serializable
 object DashboardScreen
+
+@Serializable
+object MyAccountScreen
+
+@Serializable
+object MenuScreen
+
+@Serializable
+object FriendsAndFamilyScreen
+
+@Serializable
+object SecurityScreen
+
+@Serializable
+object LegalScreen

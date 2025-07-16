@@ -1,6 +1,7 @@
 package com.fiveexceptions.seismocon.dashboard.home.allSensorsNow
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.fiveexceptions.seismocon.core.commonComposables.AppIconImage
 import com.fiveexceptions.seismocon.core.commonComposables.LabelText
 import com.fiveexceptions.seismocon.dashboard.home.gradientBackground
@@ -34,7 +36,7 @@ import seismocon.composeapp.generated.resources.ic_back_white_color
 
 @Preview
 @Composable
-fun AllSensorsNow() {
+fun AllSensorsNow(navController: NavController) {
     MaterialTheme {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -59,14 +61,15 @@ fun AllSensorsNow() {
                 ) {
                     LabelText(
                         text = "All Sensors Now",
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().align(Alignment.Center),
                         textStyle = MaterialTheme.typography.titleMedium
                     )
 
                     Box(
                         modifier = Modifier.size(28.dp).border(
                             width = 1.dp, color = Gray, shape = RoundedCornerShape(8.dp)
-                        ).padding(6.dp)
+                        ).padding(6.dp).clickable(onClick = { navController.popBackStack() })
+                            .align(Alignment.CenterStart)
                     ) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_back_white_color),

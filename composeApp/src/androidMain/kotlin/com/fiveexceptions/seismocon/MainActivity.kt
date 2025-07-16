@@ -27,6 +27,7 @@ class MainActivity : ComponentActivity() {
 //            MyObjectMySeismoconScreen()
 //            MyObjectInviteAFriendScreen()
 //            NotificationScreen()
+
         }
     }
 }
