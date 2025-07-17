@@ -11,12 +11,15 @@ import com.fiveexceptions.seismocon.auth.ForgotPasswordScreen
 import com.fiveexceptions.seismocon.auth.LoginScreen
 import com.fiveexceptions.seismocon.dashboard.DashboardScreen
 import com.fiveexceptions.seismocon.dashboard.home.HomeScreen
+import com.fiveexceptions.seismocon.dashboard.home.mySeismocon.allSensorsNow.AllSensorsNowScreen
+import com.fiveexceptions.seismocon.dashboard.home.mySeismocon.allSensorsNow.lidar.LidarScreen
 import com.fiveexceptions.seismocon.dashboard.home.earthquakesNow.EarthquakesNowScreen
 import com.fiveexceptions.seismocon.dashboard.home.myObject.MyObjectScreen
 import com.fiveexceptions.seismocon.dashboard.home.myObject.myObjectDetails.MyObjectDetailsScreen
 import com.fiveexceptions.seismocon.dashboard.home.myObject.myObjectInviteAFriend.MyObjectInviteAFriendScreen
 import com.fiveexceptions.seismocon.dashboard.home.myObject.myObjectReportsAndNotification.MyObjectReportsAndNotificationScreen
 import com.fiveexceptions.seismocon.dashboard.home.mySeismocon.MySeismoconScreen
+import com.fiveexceptions.seismocon.dashboard.home.mySeismocon.about.AboutMySeismoconScreen
 import com.fiveexceptions.seismocon.dashboard.home.science.ScienceScreen
 import com.fiveexceptions.seismocon.dashboard.home.technology.TechnologyScreen
 import com.fiveexceptions.seismocon.dashboard.menu.MenuScreen
@@ -134,6 +137,18 @@ fun App(onNavHostReady: suspend (NavController) -> Unit = {}) {
 
         composable<ShopScreen> {
             ShopScreen(navController)
+        }
+
+        composable<AllSensorsNowScreen> {
+            AllSensorsNowScreen(navController)
+        }
+
+        composable<LidarScreen> {
+            LidarScreen(navController)
+        }
+
+        composable<AboutMySeismoconScreen> {
+            AboutMySeismoconScreen(navController)
         }
     }
 

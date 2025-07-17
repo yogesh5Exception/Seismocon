@@ -1,4 +1,4 @@
-package com.fiveexceptions.seismocon.dashboard.home.allSensorsNow
+package com.fiveexceptions.seismocon.dashboard.home.mySeismocon.allSensorsNow
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -30,13 +30,11 @@ import com.fiveexceptions.seismocon.ui.GradientDarkBlue
 import com.fiveexceptions.seismocon.ui.GradientLightBlue
 import com.fiveexceptions.seismocon.ui.Gray
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import seismocon.composeapp.generated.resources.Res
 import seismocon.composeapp.generated.resources.ic_back_white_color
 
-@Preview
 @Composable
-fun AllSensorsNow(navController: NavController) {
+fun AllSensorsNowScreen(navController: NavController) {
     MaterialTheme {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -87,11 +85,12 @@ fun AllSensorsNow(navController: NavController) {
                     contentPadding = PaddingValues(vertical = 30.dp)
                 ) {
                     items(listOfItems) {
-                        SensorItem(modifier = Modifier.fillMaxWidth(), itemName = it)
+                        SensorItem(modifier = Modifier.fillMaxWidth(), itemName = it,
+                            navController = navController
+                        )
                         Spacer(modifier = Modifier.height(20.dp))
                     }
                 }
-
             }
         }
     }

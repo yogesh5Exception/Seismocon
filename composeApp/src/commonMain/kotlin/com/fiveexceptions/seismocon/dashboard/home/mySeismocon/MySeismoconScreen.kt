@@ -34,8 +34,9 @@ import androidx.navigation.NavController
 import com.fiveexceptions.seismocon.core.commonComposables.AppIconImage
 import com.fiveexceptions.seismocon.core.commonComposables.LabelText
 import com.fiveexceptions.seismocon.dashboard.home.gradientBackground
-import com.fiveexceptions.seismocon.dashboard.home.myObject.myObjectReportsAndNotification.MyObjectNotificationData
-import com.fiveexceptions.seismocon.dashboard.home.myObject.myObjectReportsAndNotification.MyObjectReportData
+import com.fiveexceptions.seismocon.dashboard.home.mySeismocon.about.AboutMySeismoconScreen
+import com.fiveexceptions.seismocon.navigation.AboutMySeismoconScreen
+import com.fiveexceptions.seismocon.navigation.AllSensorsNowScreen
 import com.fiveexceptions.seismocon.ui.Blue
 import com.fiveexceptions.seismocon.ui.DarkBlue2
 import com.fiveexceptions.seismocon.ui.GradientDarkBlue
@@ -44,7 +45,6 @@ import com.fiveexceptions.seismocon.ui.Gray
 import com.fiveexceptions.seismocon.ui.LightBlue
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import seismocon.composeapp.generated.resources.Res
 import seismocon.composeapp.generated.resources.ic_back_white_color
 import seismocon.composeapp.generated.resources.ic_delete
@@ -54,21 +54,7 @@ import seismocon.composeapp.generated.resources.inter_regular
 import seismocon.composeapp.generated.resources.inter_semibold
 
 @Composable
-@Preview
 fun MySeismoconScreen(navController: NavController) {
-    val reports: List<MyObjectReportData> = listOf(
-        MyObjectReportData("1231232", "Taxonomy", "03/23/2025", true, 1),
-        MyObjectReportData("1231234", "Survey", "03/25/2025", false, 3)
-    )
-
-    val notifications: List<MyObjectNotificationData> = listOf(
-        MyObjectNotificationData(
-            notificationId = "456446", date = "03/03/25", isShowingDeleteButton = false, id = 1
-        ), MyObjectNotificationData(
-            notificationId = "456446", date = "03/03/25", isShowingDeleteButton = true, id = 2
-        )
-    )
-
     MaterialTheme {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -98,7 +84,8 @@ fun MySeismoconScreen(navController: NavController) {
                     Box(
                         modifier = Modifier.size(36.dp).border(
                             width = 1.dp, color = Gray, shape = RoundedCornerShape(8.dp)
-                        ).padding(6.dp).clickable(onClick = { navController.popBackStack() }).align(Alignment.CenterStart)
+                        ).padding(6.dp).clickable(onClick = { navController.popBackStack() })
+                            .align(Alignment.CenterStart)
                     ) {
                         Icon(
                             painter = painterResource(Res.drawable.ic_back_white_color),
@@ -163,7 +150,7 @@ fun MySeismoconScreen(navController: NavController) {
                         )
                         Column {
                             listOfItems.forEach { d ->
-                                MyObjectMySeismoconMonitoringUnitItem(item = d)
+                                MyObjectMySeismoconMonitoringUnitItem(item = d, navController)
                             }
                         }
 
@@ -194,7 +181,10 @@ fun MySeismoconScreen(navController: NavController) {
 }
 
 @Composable
-fun MyObjectMySeismoconMonitoringUnitItem(item: MySeismoconMonitoringUnitData) {
+fun MyObjectMySeismoconMonitoringUnitItem(
+    item: MySeismoconMonitoringUnitData,
+    navController: NavController
+) {
     Row(
         modifier = Modifier.padding(top = 10.dp).fillMaxWidth().padding(horizontal = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -216,7 +206,9 @@ fun MyObjectMySeismoconMonitoringUnitItem(item: MySeismoconMonitoringUnitData) {
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.background(
                     Blue, shape = RoundedCornerShape(4.dp)
-                ).padding(horizontal = 8.dp).padding(vertical = 5.dp),
+                ).clickable(onClick = {
+                    navController.navigate(AllSensorsNowScreen)
+                }).padding(horizontal = 8.dp).padding(vertical = 5.dp),
                 fontFamily = FontFamily(Font(Res.font.inter_regular)),
             )
         }
@@ -228,7 +220,9 @@ fun MyObjectMySeismoconMonitoringUnitItem(item: MySeismoconMonitoringUnitData) {
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.background(
                     Blue, shape = RoundedCornerShape(4.dp)
-                ).padding(horizontal = 8.dp).padding(vertical = 5.dp),
+                ).clickable(onClick = {
+                    navController.navigate(AboutMySeismoconScreen)
+                }).padding(horizontal = 8.dp).padding(vertical = 5.dp),
                 fontFamily = FontFamily(Font(Res.font.inter_regular)),
             )
         }

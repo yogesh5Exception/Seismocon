@@ -64,3 +64,12 @@ object AlertSettingScreen
 
 @Serializable
 object ShopScreen
+
+@Serializable
+object AllSensorsNowScreen
+
+@Serializable
+object LidarScreen
+
+@Serializable
+object AboutMySeismoconScreen

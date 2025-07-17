@@ -1,7 +1,8 @@
-package com.fiveexceptions.seismocon.dashboard.home.allSensorsNow
+package com.fiveexceptions.seismocon.dashboard.home.mySeismocon.allSensorsNow
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,8 +21,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.fiveexceptions.seismocon.ui.Gray
+import androidx.navigation.NavController
+import com.fiveexceptions.seismocon.navigation.LidarScreen
 import com.fiveexceptions.seismocon.ui.Green
+import com.fiveexceptions.seismocon.ui.LightBlue
 import com.patrykandpatrick.vico.multiplatform.cartesian.CartesianChartHost
 import com.patrykandpatrick.vico.multiplatform.cartesian.data.CartesianChartModelProducer
 import com.patrykandpatrick.vico.multiplatform.cartesian.data.lineSeries
@@ -34,7 +37,7 @@ import seismocon.composeapp.generated.resources.inter_regular
 
 @Preview
 @Composable
-fun SensorItem(itemName: String, modifier: Modifier) {
+fun SensorItem(itemName: String, modifier: Modifier, navController: NavController) {
     val modelProducer = remember { CartesianChartModelProducer() }
     LaunchedEffect(Unit) {
         modelProducer.runTransaction {
@@ -48,8 +51,13 @@ fun SensorItem(itemName: String, modifier: Modifier) {
 
     Column(
         modifier = modifier
-            .background(color = Gray, shape = RoundedCornerShape(10.dp))
-            .border(width = 8.dp, color = Color.Black, shape = RoundedCornerShape(10.dp)),
+            .background(color = LightBlue, shape = RoundedCornerShape(10.dp))
+            .border(width = 8.dp, color = Color.Black, shape = RoundedCornerShape(10.dp))
+            .clickable(onClick = {
+                if (itemName.equals("LiDAR", ignoreCase = true)) {
+                    navController.navigate(LidarScreen)
+                }
+            }),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
