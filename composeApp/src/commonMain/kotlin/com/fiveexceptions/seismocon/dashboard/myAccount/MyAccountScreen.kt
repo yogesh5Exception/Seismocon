@@ -39,9 +39,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.fiveexceptions.seismocon.core.commonComposables.LabelText
+import com.fiveexceptions.seismocon.core.commonComposables.popSafeBack
 import com.fiveexceptions.seismocon.dashboard.home.gradientBackground
+import com.fiveexceptions.seismocon.dashboard.myAccount.shop.ShopScreen
+import com.fiveexceptions.seismocon.navigation.AlertSettingScreen
 import com.fiveexceptions.seismocon.navigation.FriendsAndFamilyScreen
+import com.fiveexceptions.seismocon.navigation.MyObjectScreen
 import com.fiveexceptions.seismocon.navigation.SecurityScreen
+import com.fiveexceptions.seismocon.navigation.ShopScreen
 import com.fiveexceptions.seismocon.ui.GradientDarkBlue
 import com.fiveexceptions.seismocon.ui.GradientLightBlue
 import com.fiveexceptions.seismocon.ui.LightBlue
@@ -72,7 +77,6 @@ import seismocon.composeapp.generated.resources.inter_semibold
 @Composable
 @Preview
 fun MyAccountScreen(navController: NavController) {
-    var isNavigating by remember { mutableStateOf(false) }
     var phoneNumber by remember { mutableStateOf("707-363-6035") }
     var isPhoneNumberTfEnabled by remember { mutableStateOf(false) }
     var email by remember { mutableStateOf("mike@seismocon.com") }
@@ -103,14 +107,11 @@ fun MyAccountScreen(navController: NavController) {
                         )
 
                         Box(
-                            modifier = Modifier.size(28.dp).background(
+                            modifier = Modifier.size(36.dp).background(
                                 color = White10Per, shape = RoundedCornerShape(8.dp)
                             ).padding(7.dp).clickable(
-                                enabled = !isNavigating, onClick = {
-                                    if (!isNavigating) {
-                                        isNavigating = true
-                                        navController.popBackStack()
-                                    }
+                                onClick = {
+                                    navController.popSafeBack()
                                 }).align(Alignment.CenterStart)
                         ) {
                             Icon(
@@ -193,14 +194,14 @@ fun MyAccountScreen(navController: NavController) {
                             Res.drawable.ic_alert,
                             "Alert Settings",
                             isEditable = false,
-                            onClick = {})
+                            onClick = {navController.navigate(AlertSettingScreen)})
 
                         MyAccountOptions(
                             modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
                             Res.drawable.ic_my_object,
                             "My Objects",
                             isEditable = false,
-                            onClick = {})
+                            onClick = { navController.navigate(MyObjectScreen) })
 
                         MyAccountOptions(
                             modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
@@ -214,7 +215,7 @@ fun MyAccountScreen(navController: NavController) {
                             Res.drawable.ic_shop,
                             "Shop",
                             isEditable = false,
-                            onClick = {})
+                            onClick = {navController.navigate(ShopScreen)})
 
                         MyAccountOptions(
                             modifier = Modifier.fillMaxWidth().padding(top = 16.dp),

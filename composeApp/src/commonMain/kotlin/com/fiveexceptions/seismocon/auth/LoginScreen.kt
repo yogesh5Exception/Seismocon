@@ -40,9 +40,9 @@ import seismocon.composeapp.generated.resources.img_auth_bg
 @Composable
 @Preview
 fun LoginScreen(
-    signInClick : () -> Unit = {},
-    guestClick : () -> Unit = {},
-    forgotPasswordClick : () -> Unit = {}
+    signInClick: () -> Unit = {},
+    guestClick: () -> Unit = {},
+    forgotPasswordClick: () -> Unit = {}
 ) {
     var userName by rememberSaveable {
         mutableStateOf("")

@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.fiveexceptions.seismocon.core.commonComposables.AppIconImage
 import com.fiveexceptions.seismocon.core.commonComposables.LabelText
+import com.fiveexceptions.seismocon.core.commonComposables.popSafeBack
 import com.fiveexceptions.seismocon.dashboard.home.gradientBackground
 import com.fiveexceptions.seismocon.ui.GradientDarkBlue
 import com.fiveexceptions.seismocon.ui.GradientLightBlue
@@ -39,7 +40,6 @@ import seismocon.composeapp.generated.resources.ic_back_white_color
 @Composable
 @Preview
 fun NotificationScreen(navController: NavController) {
-    var isNavigating by remember { mutableStateOf(false) }
 
     val items: List<NotificationData> = listOf(
         NotificationData(
@@ -117,16 +117,13 @@ fun NotificationScreen(navController: NavController) {
                     )
 
                     Box(
-                        modifier = Modifier.size(28.dp).border(
+                        modifier = Modifier.size(36.dp).border(
                             width = 1.dp, color = Gray, shape = RoundedCornerShape(8.dp)
                         ).padding(6.dp).clickable(
-                            enabled = !isNavigating,
                             onClick = {
-                                if (!isNavigating) {
-                                    isNavigating = true
-                                    navController.popBackStack()
-                                }
-                            })
+                                navController.popSafeBack()
+                            }
+                        )
                             .align(Alignment.CenterStart)
                     ) {
                         Icon(

@@ -65,7 +65,7 @@ fun TechnologyScreen(navController: NavController) {
                     )
 
                     Box(
-                        modifier = Modifier.size(28.dp).border(
+                        modifier = Modifier.size(36.dp).border(
                             width = 1.dp, color = Gray, shape = RoundedCornerShape(8.dp)
                         ).padding(6.dp).clickable(onClick = { navController.popBackStack() }).align(Alignment.CenterStart)
                     ) {

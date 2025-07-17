@@ -58,3 +58,9 @@ object SecurityScreen
 
 @Serializable
 object LegalScreen
+
+@Serializable
+object AlertSettingScreen
+
+@Serializable
+object ShopScreen

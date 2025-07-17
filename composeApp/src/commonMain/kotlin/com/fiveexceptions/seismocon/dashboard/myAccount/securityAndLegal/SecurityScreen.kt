@@ -13,15 +13,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -69,18 +71,18 @@ fun SecurityScreen(navController: NavController) {
             Scaffold(containerColor = Color.Transparent) { paddingValues ->
                 Column(
                     modifier = Modifier.fillMaxSize().padding(paddingValues)
-                        .padding(horizontal = 20.dp),
+                        .padding(horizontal = 20.dp).verticalScroll(rememberScrollState()),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     AppIconImage(
-                        modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
+                        modifier = Modifier.fillMaxWidth()
                             .padding(horizontal = 20.dp).heightIn(90.dp)
                     )
 
                     Row(
                         modifier = Modifier.padding(top = 30.dp).fillMaxWidth()
                             .background(color = Blue30, shape = RoundedCornerShape(12.dp))
-                            .padding(30.dp),
+                            .padding(20.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -112,7 +114,7 @@ fun SecurityScreen(navController: NavController) {
 
                     Text(
                         text = "Change Password",
-                        modifier = Modifier.fillMaxWidth().padding(top = 30.dp),
+                        modifier = Modifier.fillMaxWidth().padding(top = 20.dp),
                         color = Color.White,
                         fontWeight = FontWeight.SemiBold,
                         fontFamily = FontFamily(Font(Res.font.inter_medium)),
@@ -133,7 +135,7 @@ fun SecurityScreen(navController: NavController) {
 
                     Text(
                         text = "User Name",
-                        modifier = Modifier.fillMaxWidth().padding(top = 30.dp),
+                        modifier = Modifier.fillMaxWidth().padding(top = 20.dp),
                         color = Color.White,
                         fontWeight = FontWeight.SemiBold,
                         fontFamily = FontFamily(Font(Res.font.inter_medium)),
@@ -142,36 +144,35 @@ fun SecurityScreen(navController: NavController) {
                     )
 
                     Box(
-                        modifier = Modifier.padding(top = 10.dp).fillMaxWidth().border(
-                            width = 1.dp, color = White50Per, shape = RoundedCornerShape(3.dp)
-                        ).clip(RoundedCornerShape(3.dp))
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .fillMaxWidth()
+                            .border(1.dp, White50Per, RoundedCornerShape(3.dp))
+                            .clip(RoundedCornerShape(3.dp))
+                            .background(Color.Transparent)
+                            .height(40.dp),
+                        contentAlignment = Alignment.CenterStart
                     ) {
-                        TextField(
+                        BasicTextField(
                             value = username,
                             onValueChange = { username = it },
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = TextFieldDefaults.colors(
-                                focusedTextColor = Color.White,
-                                unfocusedTextColor = Color.White,
-                                unfocusedContainerColor = Color.Transparent,
-                                focusedContainerColor = Color.Transparent,
-                                disabledContainerColor = Color.Transparent,
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                                cursorColor = Color.White
-                            ),
+                            singleLine = true,
                             textStyle = TextStyle(
-                                fontFamily = FontFamily(Font(Res.font.inter_regular)),
-                                fontWeight = FontWeight.Normal,
-                                fontSize = 16.sp, // optional
+                                color = Color.White,
+                                fontSize = 14.sp,
+                                fontFamily = FontFamily(Font(Res.font.inter_regular))
                             ),
-                            singleLine = true
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp),
+                            cursorBrush = SolidColor(Color.White)
+
                         )
                     }
 
                     Text(
                         text = "Password",
-                        modifier = Modifier.fillMaxWidth().padding(top = 30.dp),
+                        modifier = Modifier.fillMaxWidth().padding(top = 20.dp),
                         color = Color.White,
                         fontWeight = FontWeight.SemiBold,
                         fontFamily = FontFamily(Font(Res.font.inter_medium)),
@@ -180,41 +181,40 @@ fun SecurityScreen(navController: NavController) {
                     )
 
                     Box(
-                        modifier = Modifier.padding(top = 10.dp).fillMaxWidth().border(
-                            width = 1.dp, color = White50Per, shape = RoundedCornerShape(3.dp)
-                        ).clip(RoundedCornerShape(3.dp))
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .fillMaxWidth()
+                            .border(1.dp, White50Per, RoundedCornerShape(3.dp))
+                            .clip(RoundedCornerShape(3.dp))
+                            .background(Color.Transparent)
+                            .height(40.dp),
+                        contentAlignment = Alignment.CenterStart
                     ) {
-                        TextField(
+                        BasicTextField(
                             value = password,
                             onValueChange = { password = it },
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = TextFieldDefaults.colors(
-                                focusedTextColor = Color.White,
-                                unfocusedTextColor = Color.White,
-                                unfocusedContainerColor = Color.Transparent,
-                                focusedContainerColor = Color.Transparent,
-                                disabledContainerColor = Color.Transparent,
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                                cursorColor = Color.White
-                            ),
+                            singleLine = true,
                             textStyle = TextStyle(
-                                fontFamily = FontFamily(Font(Res.font.inter_regular)),
-                                fontWeight = FontWeight.Normal,
-                                fontSize = 16.sp, // optional
+                                color = Color.White,
+                                fontSize = 14.sp,
+                                fontFamily = FontFamily(Font(Res.font.inter_regular))
                             ),
-                            singleLine = true
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp),
+                            cursorBrush = SolidColor(Color.White)
+
                         )
                     }
 
                     Box(
-                        modifier = Modifier.padding(top = 40.dp).fillMaxWidth().height(1.dp)
+                        modifier = Modifier.padding(top = 20.dp).fillMaxWidth().height(1.dp)
                             .background(color = White10Per)
                     )
 
                     Text(
                         text = "New Passwords",
-                        modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
+                        modifier = Modifier.fillMaxWidth().padding(top = 20.dp),
                         color = Color.White,
                         fontWeight = FontWeight.SemiBold,
                         fontFamily = FontFamily(Font(Res.font.inter_medium)),
@@ -223,36 +223,35 @@ fun SecurityScreen(navController: NavController) {
                     )
 
                     Box(
-                        modifier = Modifier.padding(top = 10.dp).fillMaxWidth().border(
-                            width = 1.dp, color = White50Per, shape = RoundedCornerShape(3.dp)
-                        ).clip(RoundedCornerShape(3.dp))
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .fillMaxWidth()
+                            .border(1.dp, White50Per, RoundedCornerShape(3.dp))
+                            .clip(RoundedCornerShape(3.dp))
+                            .background(Color.Transparent)
+                            .height(40.dp),
+                        contentAlignment = Alignment.CenterStart
                     ) {
-                        TextField(
+                        BasicTextField(
                             value = newPassword,
                             onValueChange = { newPassword = it },
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = TextFieldDefaults.colors(
-                                focusedTextColor = Color.White,
-                                unfocusedTextColor = Color.White,
-                                unfocusedContainerColor = Color.Transparent,
-                                focusedContainerColor = Color.Transparent,
-                                disabledContainerColor = Color.Transparent,
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                                cursorColor = Color.White
-                            ),
+                            singleLine = true,
                             textStyle = TextStyle(
-                                fontFamily = FontFamily(Font(Res.font.inter_regular)),
-                                fontWeight = FontWeight.Normal,
-                                fontSize = 16.sp, // optional
+                                color = Color.White,
+                                fontSize = 14.sp,
+                                fontFamily = FontFamily(Font(Res.font.inter_regular))
                             ),
-                            singleLine = true
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp),
+                            cursorBrush = SolidColor(Color.White)
+
                         )
                     }
 
                     Text(
                         text = "Repeat New Password",
-                        modifier = Modifier.fillMaxWidth().padding(top = 30.dp),
+                        modifier = Modifier.fillMaxWidth().padding(top = 20.dp),
                         color = Color.White,
                         fontWeight = FontWeight.SemiBold,
                         fontFamily = FontFamily(Font(Res.font.inter_medium)),
@@ -261,30 +260,29 @@ fun SecurityScreen(navController: NavController) {
                     )
 
                     Box(
-                        modifier = Modifier.padding(top = 10.dp).fillMaxWidth().border(
-                            width = 1.dp, color = White50Per, shape = RoundedCornerShape(3.dp)
-                        ).clip(RoundedCornerShape(3.dp))
+                        modifier = Modifier
+                            .padding(top = 10.dp)
+                            .fillMaxWidth()
+                            .border(1.dp, White50Per, RoundedCornerShape(3.dp))
+                            .clip(RoundedCornerShape(3.dp))
+                            .background(Color.Transparent)
+                            .height(40.dp),
+                        contentAlignment = Alignment.CenterStart
                     ) {
-                        TextField(
+                        BasicTextField(
                             value = repeatNewPassword,
                             onValueChange = { repeatNewPassword = it },
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = TextFieldDefaults.colors(
-                                focusedTextColor = Color.White,
-                                unfocusedTextColor = Color.White,
-                                unfocusedContainerColor = Color.Transparent,
-                                focusedContainerColor = Color.Transparent,
-                                disabledContainerColor = Color.Transparent,
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                                cursorColor = Color.White
-                            ),
+                            singleLine = true,
                             textStyle = TextStyle(
-                                fontFamily = FontFamily(Font(Res.font.inter_regular)),
-                                fontWeight = FontWeight.Normal,
-                                fontSize = 16.sp, // optional
+                                color = Color.White,
+                                fontSize = 14.sp,
+                                fontFamily = FontFamily(Font(Res.font.inter_regular))
                             ),
-                            singleLine = true
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp),
+                            cursorBrush = SolidColor(Color.White)
+
                         )
                     }
 
@@ -294,7 +292,7 @@ fun SecurityScreen(navController: NavController) {
                             containerColor = Blue
                         ),
                         shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier.padding(top = 40.dp)
+                        modifier = Modifier.padding(top = 20.dp)
                     ) {
                         Text(
                             "Submit",
@@ -309,7 +307,7 @@ fun SecurityScreen(navController: NavController) {
 
                     Button(
                         onClick = { navController.navigateUp() },
-                        modifier = Modifier.padding(top = 30.dp).border(
+                        modifier = Modifier.padding(top = 20.dp).border(
                             width = 1.dp,
                             color = Color.White,
                             shape = RoundedCornerShape(12.dp)

@@ -24,7 +24,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -37,6 +36,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.fiveexceptions.seismocon.core.commonComposables.LabelText
+import com.fiveexceptions.seismocon.core.commonComposables.popSafeBack
 import com.fiveexceptions.seismocon.dashboard.home.gradientBackground
 import com.fiveexceptions.seismocon.ui.GradientDarkBlue
 import com.fiveexceptions.seismocon.ui.GradientLightBlue
@@ -51,7 +51,6 @@ import seismocon.composeapp.generated.resources.inter_regular
 
 @Composable
 fun LegalScreen(navController: NavController) {
-    var isNavigating by remember { mutableStateOf(false) }
 
     var allCheck by rememberSaveable { mutableStateOf(true) }
     var textCheck by rememberSaveable { mutableStateOf(true) }
@@ -75,7 +74,8 @@ fun LegalScreen(navController: NavController) {
             ) { paddingValues ->
 
                 Column(
-                    modifier = Modifier.fillMaxSize().padding(paddingValues).padding(top = 20.dp),
+                    modifier = Modifier.fillMaxSize().padding(paddingValues).padding(top = 20.dp)
+                        .verticalScroll(rememberScrollState()),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Box(
@@ -88,14 +88,11 @@ fun LegalScreen(navController: NavController) {
                         )
 
                         Box(
-                            modifier = Modifier.size(28.dp).background(
+                            modifier = Modifier.size(36.dp).background(
                                 color = White10Per, shape = RoundedCornerShape(8.dp)
                             ).padding(7.dp).clickable(
-                                enabled = !isNavigating, onClick = {
-                                    if (!isNavigating) {
-                                        isNavigating = true
-                                        navController.popBackStack()
-                                    }
+                                onClick = {
+                                    navController.popSafeBack()
                                 }).align(Alignment.CenterStart)
                         ) {
                             Icon(

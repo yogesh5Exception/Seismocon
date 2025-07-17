@@ -3,6 +3,7 @@ package com.fiveexceptions.seismocon.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -20,9 +21,11 @@ import com.fiveexceptions.seismocon.dashboard.home.science.ScienceScreen
 import com.fiveexceptions.seismocon.dashboard.home.technology.TechnologyScreen
 import com.fiveexceptions.seismocon.dashboard.menu.MenuScreen
 import com.fiveexceptions.seismocon.dashboard.myAccount.MyAccountScreen
+import com.fiveexceptions.seismocon.dashboard.myAccount.alertSetting.AlertSettingScreen
 import com.fiveexceptions.seismocon.dashboard.myAccount.friendsAndFamily.FriendsAndFamilyScreen
 import com.fiveexceptions.seismocon.dashboard.myAccount.securityAndLegal.LegalScreen
 import com.fiveexceptions.seismocon.dashboard.myAccount.securityAndLegal.SecurityScreen
+import com.fiveexceptions.seismocon.dashboard.myAccount.shop.ShopScreen
 import com.fiveexceptions.seismocon.dashboard.notification.NotificationScreen
 import com.fiveexceptions.seismocon.splash.SplashScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -30,7 +33,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 @Preview
 fun App(onNavHostReady: suspend (NavController) -> Unit = {}) {
-    val navController = rememberNavController()
+    val navController: NavHostController = rememberNavController()
     NavHost(navController, startDestination = SplashScreen) {
         composable<SplashScreen> {
             SplashScreen {
@@ -123,6 +126,14 @@ fun App(onNavHostReady: suspend (NavController) -> Unit = {}) {
 
         composable<LegalScreen> {
             LegalScreen(navController)
+        }
+
+        composable<AlertSettingScreen> {
+            AlertSettingScreen(navController)
+        }
+
+        composable<ShopScreen> {
+            ShopScreen(navController)
         }
     }
 
